@@ -42,12 +42,12 @@
 %-----------------
 
 \ifdefined\cvprint{}
-	\colorlet{lightred}{lightgrey}
-	\colorlet{lightgreen}{lightgrey}
-	\colorlet{lightbrown}{lightgrey}
-	\colorlet{lightblue}{lightgrey}
-	\colorlet{lightmagenta}{lightgrey}
-	\colorlet{lightcyan}{lightgrey}
+	\colorlet{lightred}{darkgrey}
+	\colorlet{lightgreen}{darkgrey}
+	\colorlet{lightbrown}{darkgrey}
+	\colorlet{lightblue}{darkgrey}
+	\colorlet{lightmagenta}{darkgrey}
+	\colorlet{lightcyan}{darkgrey}
 	\colorlet{darkred}{darkgrey}
 	\colorlet{darkgreen}{darkgrey}
 	\colorlet{darkbrown}{darkgrey}
@@ -60,11 +60,11 @@
 %------
 
 \RequirePackage{fontspec}
-\setmainfont{Roboto}
+\setmainfont[Color=darkgrey]{Roboto}
 \newfontfamily\body{Roboto}
 \newfontfamily\light{Roboto Light}
 \newfontfamily\condensed{Roboto Condensed}
-\newfontfamily\condensedlight{Roboto Condensed Light}
+\newfontfamily\bold{Roboto Bold}
 
 % Header
 %-------
@@ -73,7 +73,7 @@
 	\begin{flushright}
 	\fontsize{40pt}{72pt}\color{darkgrey}{\light{}#1\body{}#2}\\
 	\fontsize{14pt}{24pt}\color{darkgrey}{\light{}#3}
-	\vspace{2cm}
+	\vspace{0.5cm}
 \end{flushright}}
 
 % Sections
@@ -100,10 +100,10 @@
 \renewcommand{\section}[1]{
 	\par\vspace{\parskip}
 	{
-    \LARGE\condensed\color{darkgrey}
-    \sectioncolor{#1}
-  }
-  \par\vspace{\parskip}
+	\LARGE\condensed\color{darkgrey}
+	\sectioncolor{#1}
+	}
+	\par\vspace{\parskip}
 }
 
 \renewcommand{\subsection}[2]{
@@ -123,17 +123,33 @@
 }{
 	\end{tabular*}
 }
-\renewcommand{\bfseries}{\condensed\color{darkgrey}}
+\renewcommand{\bfseries}{\bold\color{darkgrey}}
 \newcommand{\entry}[4]{
-	#1&\parbox[t]{11cm}{
-	\textbf{#2}
+	\footnotesize\color{darkgrey}#1&\parbox[t]{0.8\columnwidth}{
+	\footnotesize\textbf{#2}
 	\hfill
 	{\footnotesize\addfontfeature{Color=lightgrey} #3}\\
-	#4\vspace{\parsep}
+	\footnotesize\color{darkgrey}#4\vspace{\parsep}
 }\\}
 
 % Side block
 %-----------
+
+\newcounter{sideColorCounter}
+\newcommand\sidesectioncolor[1]{
+{
+	\color{
+		\ifcase\value{sideColorCounter}
+		darkblue\or
+		darkred\or
+		darkbrown\or
+		darkgreen\or
+		darkmagenta\else
+		darkgrey\fi
+	}#1
+}
+\stepcounter{sideColorCounter}
+}
 
 \RequirePackage[absolute,overlay]{textpos}
 \setlength{\TPHorizModule}{1cm}
@@ -141,9 +157,11 @@
 \newenvironment{aside}{
 	\let\oldsection\section
 	\renewcommand{\section}[1]{
-	\par\vspace{\baselineskip}{\Large\condensed\color{darkgrey} ##1}
-}
-	\begin{textblock}{3.6}(1.5, 8.33)
+		\par\vspace{\baselineskip}
+		{\Large\condensed\color{darkgray}\sidesectioncolor{##1}}
+		\vspace{\parskip}
+	}
+	\begin{textblock}{3.6}(1.5, 4.33)
 	\begin{flushright}
 	\obeycr
 }{
@@ -156,5 +174,5 @@
 % Other tweaks
 %-------------
 
-\RequirePackage[a4paper,left=6.1cm,right=1.5cm,bottom=2.5cm,nohead,nofoot]{geometry}
+\RequirePackage[a4paper,top=1.5cm,left=6.1cm,right=1.5cm,bottom=2.5cm,nohead,nofoot]{geometry}
 \RequirePackage{hyperref}
