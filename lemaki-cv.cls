@@ -125,11 +125,11 @@
 }
 \renewcommand{\bfseries}{\bold\color{darkgrey}}
 \newcommand{\entry}[4]{
-	\footnotesize\color{darkgrey}#1&\parbox[t]{0.8\columnwidth}{
-	\footnotesize\textbf{#2}
+	\small\color{darkgrey}#1&\parbox[t]{0.8\columnwidth}{
+	\small\textbf{#2}
 	\hfill
-	{\footnotesize\addfontfeature{Color=lightgrey} #3}\\
-	\footnotesize\color{darkgrey}#4\vspace{\parsep}
+	{\small\addfontfeature{Color=lightgrey} #3}\\
+	\small\color{darkgrey}#4\vspace{\parsep}
 }\\}
 
 % Side block
