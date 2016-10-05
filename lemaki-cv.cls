@@ -161,7 +161,7 @@
 		{\Large\condensed\color{darkgray}\sidesectioncolor{##1}}
 		\vspace{\parskip}
 	}
-	\begin{textblock}{3.6}(1.5, 4.33)
+	\begin{textblock}{3.6}(1.5, 6.0)
 	\begin{flushright}
 	\obeycr
 }{
